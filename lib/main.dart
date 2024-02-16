@@ -12,9 +12,7 @@ late Size mq;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
-
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((value) {
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'We Chat',
+        title: 'CHATAPP',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             appBarTheme: const AppBarTheme(

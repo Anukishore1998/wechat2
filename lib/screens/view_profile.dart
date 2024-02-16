@@ -53,8 +53,6 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                 children: [
                   // for adding some space
                   SizedBox(width: mq.width, height: mq.height * .03),
-
-                  //user profile picture
                   ClipRRect(
                     borderRadius: BorderRadius.circular(mq.height * .1),
                     child: CachedNetworkImage(
@@ -79,21 +77,21 @@ class _ViewProfileScreenState extends State<ViewProfileScreen> {
                   SizedBox(height: mq.height * .02),
 
                   //user about
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                        'About: ',
-                        style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      ),
-                      Text(widget.user.about,
-                          style: const TextStyle(
-                              color: Colors.black54, fontSize: 15)),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     const Text(
+                  //       'About: ',
+                  //       style: TextStyle(
+                  //           color: Colors.black87,
+                  //           fontWeight: FontWeight.w500,
+                  //           fontSize: 15),
+                  //     ),
+                  //     Text(widget.user.about,
+                  //         style: const TextStyle(
+                  //             color: Colors.black54, fontSize: 15)),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

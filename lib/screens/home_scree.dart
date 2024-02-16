@@ -73,84 +73,118 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           //app bar
           appBar: AppBar(
-            leading: const Icon(CupertinoIcons.home),
-            title: _isSearching
-                ? TextField(
-                    decoration: const InputDecoration(
-                        border: InputBorder.none, hintText: 'Name, Email, ...'),
-                    autofocus: true,
-                    style: const TextStyle(fontSize: 17, letterSpacing: 0.5),
-                    //when search text changes then updated search list
-                    onChanged: (val) {
-                      //search logic
-                      _searchList.clear();
-
-                      for (var i in _list) {
-                        if (i.name.toLowerCase().contains(val.toLowerCase()) ||
-                            i.email.toLowerCase().contains(val.toLowerCase())) {
-                          _searchList.add(i);
-                          setState(() {
-                            _searchList;
-                          });
-                        }
-                      }
-                    },
-                  )
-                : const Text('We Chat'),
+            flexibleSpace: _appBar(),
+            // leading: const Icon(CupertinoIcons.home),
+            // title: _isSearching
+            //     ? TextField(
+            //         decoration: const InputDecoration(
+            //             border: InputBorder.none, hintText: 'Name, Email, ...'),
+            //         autofocus: true,
+            //         style: const TextStyle(fontSize: 17, letterSpacing: 0.5),
+            //         //when search text changes then updated search list
+            //         onChanged: (val) {
+            //           //search logic
+            //           _searchList.clear();
+            //           for (var i in _list) {
+            //             if (i.name.toLowerCase().contains(val.toLowerCase()) ||
+            //                 i.email.toLowerCase().contains(val.toLowerCase())) {
+            //               _searchList.add(i);
+            //               setState(() {
+            //                 _searchList;
+            //               });
+            //             }
+            //           }
+            //         },
+            //       )
+            //     : const Text('CHATAPP'),
             actions: [
               //search user button
-              IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isSearching = !_isSearching;
-                    });
-                  },
-                  icon: Icon(_isSearching
-                      ? CupertinoIcons.clear_circled_solid
-                      : Icons.search)),
-
+              // IconButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         _isSearching = !_isSearching;
+              //       });
+              //     },
+              //     icon: Icon(_isSearching
+              //         ? CupertinoIcons.clear_circled_solid
+              //         : Icons.search)),
               //more features button
               IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => ProfileScreen(user: APIs.me)));
-                  },
-                  icon: const Icon(Icons.more_vert))
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.notifications,
+                    size: 30,
+                    color: Colors.white,
+                  )),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => ProfileScreen(user: APIs.me)));
+                },
+                icon: Image.asset(
+                  'assets/images/manview.png',
+                  height: 160,
+                ),
+              )
             ],
           ),
+          // appBar: AppBar(
+          //   backgroundColor: Color.fromRGBO(4, 27, 90, 1),
+          //   leading: Icon(
+          //     Icons.arrow_back,
+          //     color: Colors.white,
+          //   ),
+          //   actions: [
+          //     Padding(
+          //       padding: const EdgeInsets.only(right: 15.0),
+          //       child: Icon(
+          //         Icons.account_balance_wallet_outlined,
+          //         size: 27,
+          //         color: Colors.white,
+          //       ),
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.only(right: 20.0),
+          //       child: Icon(
+          //         Icons.notification_add,
+          //         color: Colors.white,
+          //         size: 27,
+          //       ),
+          //     )
+          //   ],
+          //   toolbarHeight: 70,
+          // ),
 
           //floating button to add new user
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: FloatingActionButton(
+                backgroundColor: Color.fromARGB(255, 92, 156, 94),
                 onPressed: () {
                   _addChatUserDialog();
                 },
-                child: const Icon(Icons.add_comment_rounded)),
+                child: const Icon(
+                  Icons.add_card_outlined,
+                  color: Colors.white,
+                )),
           ),
 
           //body
           body: StreamBuilder(
             stream: APIs.getMyUsersId(),
-
-            //get id of only known users
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 //if data is loading
                 case ConnectionState.waiting:
                 case ConnectionState.none:
                   return const Center(child: CircularProgressIndicator());
-
-                //if some or all data is loaded then show it
                 case ConnectionState.active:
                 case ConnectionState.done:
                   return StreamBuilder(
                     stream: APIs.getAllUsers(
                         snapshot.data?.docs.map((e) => e.id).toList() ?? []),
-
-                    //get only those user, who's ids are provided
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
                         //if data is loading
@@ -266,4 +300,16 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ));
   }
+}
+
+Widget _appBar() {
+  return Container(
+    decoration: BoxDecoration(
+      gradient: LinearGradient(
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+        colors: [Color.fromRGBO(9, 29, 97, 1), Color.fromRGBO(8, 27, 85, 1)],
+      ),
+    ),
+  );
 }

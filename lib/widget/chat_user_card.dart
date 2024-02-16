@@ -27,10 +27,10 @@ class _ChatUserCardState extends State<ChatUserCard> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(horizontal: mq.width * .04, vertical: 4),
-      // color: Colors.blue.shade100,
+      // margin: EdgeInsets.symmetric(horizontal: mq.width * .04, vertical: 4),
+      color: Colors.grey.shade200,
       elevation: 0.5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: InkWell(
           onTap: () {
             //for navigating to chat screen
